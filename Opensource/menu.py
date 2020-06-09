@@ -1,6 +1,7 @@
 import pygame
 import interface
 import GameOver
+import Map_1_start
 
 # Copyright : 노관태 - 메뉴1 구현 - 맵 선택화면
 
@@ -52,7 +53,8 @@ def start_menu1 (screen):
                         GameOver.GameOver(screen,95000,8,1200)
                         return 1
                     elif position[0] > 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256:
-                        pass
+                        Map_1_start.Map_1_starting(screen)
+                        return 1
                     elif position[0] > 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256:
                         pass
 
