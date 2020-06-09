@@ -1,5 +1,7 @@
 import pygame
 import map
+import time
+
 
 def Map_1_starting(screen) :
     back_ground = pygame.image.load("image/virus/map2.png")
@@ -10,11 +12,49 @@ def Map_1_starting(screen) :
 
 
 
+
     screen.blit(back_ground, (0, 0))
     map1.draw()
 
 
     while True :
+        screen.blit(back_ground, (0, 0))
+        screen.blit(interface, (1030, 0))
+        map1.draw()
+        pygame.display.flip()
+
+        oldtime = time.time()
+        curtime = time.time()
+
+        while curtime - oldtime <=30000 :
+            screen.blit(back_ground, (0, 0))
+            screen.blit(interface, (1030, 0))
+
+
+
+
+
+            map1.draw()
+
+
+
+
+
+
+
+
+            pygame.display.flip()
+            curtime = time.time()
+
+
+
+
+
+
+
+
+
+
 
 
 
