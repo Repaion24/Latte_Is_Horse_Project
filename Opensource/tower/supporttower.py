@@ -12,6 +12,7 @@ class support_tower(tower) :
         self.height = 0
         self.plus_damage = 2
         self.range = 100
+        self.speed = 1
         self.level = 0
         self.attack = 0
         self.timer = 0
@@ -27,5 +28,5 @@ class support_tower(tower) :
 
     def upgrade_tower(self):
         self.range += 25
-        self.plus_damge += 1
+        self.plus_damage += 1
         return self.upgrade_price[self.level]
