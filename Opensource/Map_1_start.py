@@ -275,7 +275,7 @@ def Map_1_starting(screen) :
                        virus.Virus.staticNum -= 1
                        break
                    else:
-                       badguy[n].move()
+                    badguy[n].move()
 
                 # 바이러스 화면 출력 #copyright 이동우
                 for n in range(0, virus.Virus.staticNum):
