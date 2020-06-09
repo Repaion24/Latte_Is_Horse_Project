@@ -39,7 +39,7 @@ class Virus: #copyright 이동우
     def __init__(self,type=0): #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_0.png") #바이러스 이미지
         self.type = type
-        self.health = pygame.image.load("img/health.png")
+        #self.health = pygame.image.load("img/health.png")
         self.x_size = self.img.get_width() #바이러스 x 사이즈
         self.y_size = self.img.get_height() #바이러스 y 사이즈
         self.pos =[0,0]
