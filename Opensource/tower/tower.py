@@ -1,3 +1,4 @@
+#made by 김재희
 import pygame
 
 class tower :
@@ -15,8 +16,8 @@ class tower :
         self.attack = 0
         self.timer = 0
         self.selected = False
-        self.upgrade_price = [50, 100, 150]
-        self.sell_price = [25, 50, 75]
+        self.upgrade_price = [50, 100, 150, "done"]
+        self.sell_price = [25, 50, 75, 100]
         self.Timage = []
         self.Timage.append(pygame.image.load("tower/normal_tower1.png"))
         self.Timage.append(pygame.image.load("tower/normal_tower2.png"))
@@ -39,8 +40,13 @@ class tower :
 
     def draw_menu(self, screen):
         if self.selected:
-            screen.blit(self.sell, (400, 650))
-            screen.blit(self.upgrade, (620, 650))
+            tfont = pygame.font.Font(None, 26)
+            sell_font = tfont.render("Sell : " + str(self.sell_price[self.level]), True, (255,255,255))
+            upgrade_font = tfont.render("Upgrade : " + str(self.upgrade_price[self.level]), True, (255,255,255))
+            screen.blit(self.sell, (1048, 512))
+            screen.blit(sell_font, (1068, 532))
+            screen.blit(self.upgrade, (1048, 459))
+            screen.blit(upgrade_font, (1068, 479))
 
     def draw_surface(self, screen):
         if self.selected:
@@ -61,7 +67,7 @@ class tower :
         self.level += 1
         self.range += 25
         self.damage += 1
-        return self.upgrade_price[self.level]
+        return self.upgrade_price[self.level-1]
 
     def tower_attack(self, gtimer):
         if gtimer - self.timer >= self.speed :

@@ -6,20 +6,26 @@ WHITE = (255,255,255)
 BLACK = (0,0,0)
 
 def madeVirus(a,b,c=0,d=0): #copyright 이동우
-    enemy =[num for num in range(0,a+b+c+d)]
-    for i in range(0,a):
-        enemy[i] = Virus()
-    for j in range(a,b+a):
-        enemy[j] = Virus(1)
-        enemy[j].setType()
-    for x in range(a+b,a+b+c):
-        enemy[x] = Virus(2)
-        enemy[x].setType()
-    for z in range(a+b+c,a+b+c+d):
-        enemy[z] = Virus(3)
-        enemy[z].setType()
+    enemy = []
+    index = -1
+    for i in range(0, a):
+        enemy.append(Virus())
+        index += 1
+    for j in range(0, b):
+        enemy.append(Virus(1))
+        index += 1
+        enemy[index].setType()
+    for x in range(0, c):
+        enemy.append(Virus(2))
+        index += 1
+        enemy[index].setType()
+    for z in range(0, d):
+        enemy.append(Virus(3))
+        index += 1
+        enemy[index].setType()
 
     return enemy
+
 
 def draw_text(text, surface, x, y, main_color): #copyright 이동우
     font = pygame.font.SysFont("notosanscjkkr", 30)
@@ -32,14 +38,14 @@ def draw_text(text, surface, x, y, main_color): #copyright 이동우
 class Virus: #copyright 이동우
 
     virusNum =0 #클래스 변수, 현재 맵에 있는 바이러스 수
-    staticNum =0 #현재 만들어진 바이러스 수
+    staticNum =-1 #현재 만들어진 바이러스 수
     maxNum =0 #현재 맵에서 만들 수 있는 바이러스 수
     AllNum = 0 #여태까지 죽인 모든 바이러스 수
 
     def __init__(self,type=0): #copyright 이동우
-        self.img = pygame.image.load("img/virus_0.png") #바이러스 이미지
+        self.img = pygame.image.load("image/virus/virus_0.png") #바이러스 이미지
         self.type = type
-        self.health = pygame.image.load("img/health.png")
+        #self.health = pygame.image.load("img/health.png")
         self.x_size = self.img.get_width() #바이러스 x 사이즈
         self.y_size = self.img.get_height() #바이러스 y 사이즈
         self.pos =[0,0]
@@ -130,21 +136,21 @@ class Virus: #copyright 이동우
         return Y
 
     def type1(self): #copyright 이동우
-        self.img = pygame.image.load("img/virus_1.png")  # 바이러스 이미지
+        self.img = pygame.image.load("image/virus/virus_1.png")  # 바이러스 이미지
         self.name = "ZIKA virus"
         self.hp = 12  # 바이러스 체력
         self.dmg = 5  # 바이러스 공격력
         self.speed = 2  # 바이러스 스피드
 
     def type2(self): #copyright 이동우
-        self.img = pygame.image.load("img/virus_2.png")  # 바이러스 이미지
+        self.img = pygame.image.load("image/virus/virus_2.png")  # 바이러스 이미지
         self.name = "EBOLA virus"
         self.hp = 12  # 바이러스 체력
         self.dmg = 5  # 바이러스 공격력
         self.speed = 1  # 바이러스 스피드
 
     def type3(self): #copyright 이동우
-        self.img = pygame.image.load("img/virus_bh.png")  # 바이러스 이미지
+        self.img = pygame.image.load("image/virus/virus_bh.png")  # 바이러스 이미지
         self.name = " CORONA virus"
         self.hp = 12  # 바이러스 체력
         self.dmg = 5  # 바이러스 공격력

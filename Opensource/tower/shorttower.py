@@ -1,3 +1,4 @@
+#made by 김재희
 import pygame
 from .tower import tower
 
@@ -17,8 +18,8 @@ class short_tower(tower) :
         self.timer = 0
         self.selected = False
         self.attack_on = False
-        self.upgrade_price = [100, 150, 200]
-        self.sell_price = [50, 75, 100]
+        self.upgrade_price = [100, 150, 200, "done"]
+        self.sell_price = [50, 75, 100, 100]
         self.Timage = []
         self.Timage.append(pygame.image.load("tower/short_tower1.png"))
         self.Timage.append(pygame.image.load("tower/short_tower2.png"))
