@@ -2,6 +2,7 @@ import pygame
 import map
 import virus
 import time
+import GameOver
 from tower.tower import tower
 from tower.shorttower import short_tower
 from tower.longtower import long_tower
@@ -47,12 +48,15 @@ def Map_1_starting(screen) :
 
     screen.blit(back_ground, (0, 0))
     map1.draw()
+    Gameoverbool = False
 
 ## 바이러스
     wave_num = 6
     badguy = virus.madeVirus(1, 2, 2, 1)  # 바이러스 객체들을 담을 배열
     for i in range(0, wave_num):
         badguy[i].setPos([780, 720])
+        badguy[i].path = [[780, 720], [780, 420], [540, 420], [540, 180], [300, 180], [300, 420], [120, 420], [120, 60],
+                          [0, 60]]
     selectNum = -1
 
 
@@ -69,24 +73,29 @@ def Map_1_starting(screen) :
         oldtime = time.time()
         curtime = time.time()
 
+
+
+
         while True : #Copyright : 김재희
-            timer = Font.render("Time : " + str(int(10-(curtime-oldtime))),True,(0,0,0)) #Copyright : 김재희
+            timer = Font.render("Time : " + str((10-(curtime-oldtime))),True,(0,0,0)) #Copyright : 김재희
 
             screen.blit(back_ground, (0, 0))
             screen.blit(interface, (1030, 0))
-            if(curtime-oldtime < 10) :
+            if(curtime-oldtime > 0) :
                 screen.blit(timer,(850,20))
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     for i in range(0, virus.Virus.staticNum):
                         if badguy[i].boolDtc():
                             selectNum = i
+                            break
+                        selectNum = -1
                     position = pygame.mouse.get_pos()
                     if build == 0:  # made by 김재희~
                         for i in range(0, len(tower1)):
                             if tower1[i].selected:
-                                if position[1] >= 650 and position[1] <= 650 + tower1[i].sell.get_height():
-                                    if position[0] >= 400 and position[0] <= 400 + tower1[i].sell.get_width():
+                                if position[0] >= 1048 and position[0] <= 1048 + tower1[i].sell.get_width():
+                                    if position[1] >= 512 and position[1] <= 512 + tower1[i].sell.get_height():
                                         gold += tower1[i].sell_tower()
                                         if tower1[i].is_support == True:
                                             for k in range(0, len(support_index)):
@@ -99,7 +108,7 @@ def Map_1_starting(screen) :
                                         tower1.pop(i)
                                         index -= 1
                                         break
-                                    if position[0] >= 620 and position[0] <= 620 + tower1[i].upgrade.get_width():
+                                    if position[1] >= 459 and position[1] <= 459 + tower1[i].upgrade.get_height():
                                         if tower1[i].level <= 2:
                                             if gold >= tower1[i].upgrade_price[tower1[i].level]:
                                                 if tower1[i].level == 2:
@@ -168,20 +177,31 @@ def Map_1_starting(screen) :
                 position = pygame.mouse.get_pos()
                 tower1[index].build_tower(position[0], position[1])
             for i in range(0, len(tower1)):
-                if len(enemy1) > 0:
-                    for j in range(0, len(enemy1)):
+                attack_on = False
+                if len(badguy) > 0:
+                    for j in range(0, len(badguy)):
                         if (tower1[i].is_support != True):
-                            if (enemy1[j].x - tower1[i].x) * (enemy1[j].x - tower1[i].x) \
-                                    + (enemy1[j].y - tower1[i].y) * (enemy1[j].y - tower1[i].y) <= tower1[i].range * \
+                            if (badguy[j].center[0] - tower1[i].x) * (badguy[j].center[0] - tower1[i].x) \
+                                    + (badguy[j].center[1] - tower1[i].y) * (badguy[j].center[1] - tower1[i].y) <= tower1[i].range * \
                                     tower1[i].range:
+                                attack_on = True
                                 if tower1[i].tower_attack(game_timer):
-                                    enemy1[j].health -= tower1[i].damage + tower1[i].plus_damage
-                                    if enemy1[j].health <= 0:
-                                        enemy1.pop(j)
-                                        eindex -= 1
+                                    badguy[j].hp -= tower1[i].damage + tower1[i].plus_damage
+                                    if badguy[j].hp <= 0:
+                                        badguy[j].dead()
+                                        badguy.pop(j)
+                                        if selectNum == j:
+                                            selectNum = -1
+                                        elif selectNum > j:
+                                            selectNum -= 1
+                                        virus.Virus.staticNum -= 1
+                                        break
                                 break
                 else:
                     if tower1[i].is_support == False:
+                        tower1[i].attack = 0
+                if tower1[i].is_support == False:
+                    if attack_on == False:
                         tower1[i].attack = 0
             if build == 0:
                 for i in support_index:
@@ -213,6 +233,7 @@ def Map_1_starting(screen) :
             screen.blit(timg[2], (1052, 238))
             screen.blit(timg[3], (1177, 233))
             screen.blit(cancel_img, (1150, 615))
+            game_timer = time.time()
 
             map1.draw()
 
@@ -221,7 +242,9 @@ def Map_1_starting(screen) :
 
 
 
-            if(curtime-oldtime > 10) :
+
+
+            if(curtime-oldtime > 2) :
 
                 # 타이머 구현 #copyright 이동우
                 if count == 0:
@@ -235,24 +258,24 @@ def Map_1_starting(screen) :
                 # 문구 출력 #copyright 이동우
                 virus.draw_text("remaining virus : ", screen, 150, 150, BLACK)
                 virus.draw_text(str(virus.Virus.virusNum), screen, 250, 150, BLACK)
+                virus.draw_text(str(virus.Virus.staticNum), screen, 250, 200, BLACK)
                 virus.draw_text(str(selectNum), screen, 250, 170, BLACK)
                 #if life < 0:
                 #    virus.draw_text("Game over", screen, 640, 300, BLACK)
 
-                # 바이러스 좌표 조정 #copyright 이동우
+                #바이러스 좌표 조정 #copyright 이동우
                 for n in range(0, virus.Virus.staticNum):
-                    if badguy[n].pos[0] < badguy[n].x_size:  # 바이러스가 맵 끝에 도달하면
-                        badguy[n].deadP()
-                        badguy.pop(n)
-                        if selectNum == n:
-                            selectNum = -1
-                        elif selectNum > n:
-                            selectNum -= 1
-                        virus.Virus.staticNum -= 1
-                        life = life - 5  # 타워의 hp도 깎인다
-                        break
-                    else:
-                        badguy[n].move()
+                   if badguy[n].pos[0] < badguy[n].x_size:  # 바이러스가 맵 끝에 도달하면
+                       badguy[n].deadP()
+                       badguy.pop(n)
+                       if selectNum == n:
+                           selectNum = -1
+                       elif selectNum > n:
+                           selectNum -= 1
+                       virus.Virus.staticNum -= 1
+                       break
+                   else:
+                       badguy[n].move()
 
                 # 바이러스 화면 출력 #copyright 이동우
                 for n in range(0, virus.Virus.staticNum):
@@ -261,33 +284,27 @@ def Map_1_starting(screen) :
                     screen.blit(badguy[n].img, (x, y))
 
                 # 바이러스 클릭 시 바이러스 정보 출력 #copyright 이동우
-                if selectNum != -1:
+                if selectNum == -1:
+                    pass
+                elif selectNum != -1:
                     badguy[selectNum].drawInfo(screen, 1000, 600)
                 for n in range(0, virus.Virus.staticNum):
                     badguy[n].calDistance(position[0], position[1])
 
 
-
-
-
-
-
-
-
-
-
-
+                if(life <=0) :
+                    Gameoverbool = True
+                    break
+                if (virus.Virus.virusNum == 0) :
+                    break
 
 
 
             pygame.display.flip()
             curtime = time.time()
-
-
-
-
-
-
+        if Gameoverbool :
+            GameOver.GameOver(screen,95000,life,gold)
+            return 1
 
 
         for event in pygame.event.get():

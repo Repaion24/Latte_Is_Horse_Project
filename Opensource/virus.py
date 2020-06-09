@@ -6,20 +6,26 @@ WHITE = (255,255,255)
 BLACK = (0,0,0)
 
 def madeVirus(a,b,c=0,d=0): #copyright 이동우
-    enemy =[num for num in range(0,a+b+c+d)]
-    for i in range(0,a):
-        enemy[i] = Virus()
-    for j in range(a,b+a):
-        enemy[j] = Virus(1)
-        enemy[j].setType()
-    for x in range(a+b,a+b+c):
-        enemy[x] = Virus(2)
-        enemy[x].setType()
-    for z in range(a+b+c,a+b+c+d):
-        enemy[z] = Virus(3)
-        enemy[z].setType()
+    enemy = []
+    index = -1
+    for i in range(0, a):
+        enemy.append(Virus())
+        index += 1
+    for j in range(0, b):
+        enemy.append(Virus(1))
+        index += 1
+        enemy[index].setType()
+    for x in range(0, c):
+        enemy.append(Virus(2))
+        index += 1
+        enemy[index].setType()
+    for z in range(0, d):
+        enemy.append(Virus(3))
+        index += 1
+        enemy[index].setType()
 
     return enemy
+
 
 def draw_text(text, surface, x, y, main_color): #copyright 이동우
     font = pygame.font.SysFont("notosanscjkkr", 30)

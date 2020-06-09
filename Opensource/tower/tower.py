@@ -43,10 +43,10 @@ class tower :
             tfont = pygame.font.Font(None, 26)
             sell_font = tfont.render("Sell : " + str(self.sell_price[self.level]), True, (255,255,255))
             upgrade_font = tfont.render("Upgrade : " + str(self.upgrade_price[self.level]), True, (255,255,255))
-            screen.blit(self.sell, (400, 650))
-            screen.blit(sell_font, (420, 670))
-            screen.blit(self.upgrade, (620, 650))
-            screen.blit(upgrade_font, (640, 670))
+            screen.blit(self.sell, (1048, 512))
+            screen.blit(sell_font, (1068, 532))
+            screen.blit(self.upgrade, (1048, 459))
+            screen.blit(upgrade_font, (1068, 479))
 
     def draw_surface(self, screen):
         if self.selected:
@@ -67,7 +67,7 @@ class tower :
         self.level += 1
         self.range += 25
         self.damage += 1
-        return self.upgrade_price[self.level]
+        return self.upgrade_price[self.level-1]
 
     def tower_attack(self, gtimer):
         if gtimer - self.timer >= self.speed :

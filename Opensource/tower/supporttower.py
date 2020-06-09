@@ -27,6 +27,7 @@ class support_tower(tower) :
         self.upgrade = pygame.image.load("tower/upgrade.png")
 
     def upgrade_tower(self):
+        self.level +=1
         self.range += 25
         self.plus_damage += 1
-        return self.upgrade_price[self.level]
+        return self.upgrade_price[self.level-1]
