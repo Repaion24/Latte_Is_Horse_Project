@@ -38,7 +38,6 @@ def draw_text(text, surface, x, y, main_color): #copyright 이동우
 class Virus: #copyright 이동우
 
     virusNum =0 #클래스 변수, 현재 맵에 있는 바이러스 수
-    staticNum =0 #현재 만들어진 바이러스 수
     maxNum =0 #현재 맵에서 만들 수 있는 바이러스 수
     AllNum = 0 #여태까지 죽인 모든 바이러스 수
 
@@ -60,7 +59,6 @@ class Virus: #copyright 이동우
         self.path_index = 0
         self.drawterm = 1
         self.drawNum = 0
-        Virus.virusNum = Virus.virusNum + 1 #바이러스가 한 마리 생성되면 그 숫자를 늘려준다
 
     def setType(self): #copyright 이동우
         if self.type == 1:
@@ -71,7 +69,6 @@ class Virus: #copyright 이동우
             self.type3()
 
     def calDistance(self,x,y): #copyright 이동우
-        self.setCenter()
         self.distance = math.sqrt(pow(x-self.center[0],2)+pow(y-self.center[1],2))
 
     def setCenter(self): #copyright 이동우
@@ -83,7 +80,6 @@ class Virus: #copyright 이동우
         return False
 
     def setNum(self, num): #현재 맵에 있는 바이러스 수와 맵에서 만들 수 있는 바이러스 수를 설정해준다  #copyright 이동우
-        Virus.virusNum = num
         Virus.maxNum = num
     #
     # def drawHealth(self, screen):
@@ -95,15 +91,11 @@ class Virus: #copyright 이동우
 
     def dead(self): #바이러스기 죽으면 전체 바이러스 수 1 감소  #copyright 이동우
         Virus.AllNum = Virus.AllNum +1
-        Virus.virusNum = Virus.virusNum -1
-
-    def deadP(self): #copyright 이동우
-        Virus.virusNum = Virus.virusNum -1
 
     def move(self): #바이러스가 움직이는 좌표 #copyright 이동우
         x = self.pos[0]
         y = self.pos[1]
-
+        self.setCenter()
         if self.path[self.path_index][0] == x and self.path[self.path_index][1] == y:
             self.path_index = self.path_index + 1
         if self.path[self.path_index][0] < x:
