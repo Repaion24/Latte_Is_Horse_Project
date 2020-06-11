@@ -55,6 +55,14 @@ while True:
 
     # 마우스 클릭시 발생 이밴트
         if event.type == pygame.MOUSEBUTTONDOWN:
+            pygame.mixer.init()
+            pygame.mixer.music.load("sound/click.wav")
+            pygame.mixer.music.set_volume(1)  # 1 ~ 0.1
+
+            pygame.mixer.music.play()
+
+            pygame.mixer.Sound("sound/click.wav")
+
             position = pygame.mouse.get_pos()
             if position[0] >192 and position[0] < 1088 :
                 if position[1] >256 and position[1] <384 :
