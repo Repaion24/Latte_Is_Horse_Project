@@ -3,6 +3,7 @@ import map
 import virus
 import time
 import GameOver
+import challenge
 from tower.tower import tower
 from tower.shorttower import short_tower
 from tower.longtower import long_tower
@@ -14,6 +15,12 @@ from tower.supporttower import support_tower
 
 
 def Map_1_starting(screen) :
+    chal = [0,0,0,0,0,0,0,0,0]
+    chal_sv = [0,0,0,0,0,0,0,0,0]
+    touer = [False, False, False, False]
+    chal_scr = [500, 1000, 2000, 4000,6000,2000, 500, 3000, 5000] #도전과제 달성시 보상
+    chal_money = [100,200,350,550,700,200,100,500,0]
+
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
     back_ground = pygame.image.load("image/virus/map2.png")
@@ -21,6 +28,16 @@ def Map_1_starting(screen) :
     map1 = map.map(screen)
     map1.ch = [[120,60],[120,420],[300,420],[300,180],[540,180],[540,420],[780,420],[780,720]]
     map1.set([0, 60], [1280, 600])
+
+    chal_img = []
+    chal_img.append(pygame.image.load("image/challenge/chal_1.png"))
+    chal_img.append(pygame.image.load("image/challenge/chal_2.png"))
+    chal_img.append(pygame.image.load("image/challenge/chal_3.png"))
+    chal_img.append(pygame.image.load("image/challenge/chal_4.png"))
+    chal_img.append(pygame.image.load("image/challenge/chal_5.png"))
+    chal_img.append(pygame.image.load("image/challenge/chal_6.png"))
+    chal_img.append(pygame.image.load("image/challenge/chal_7.png"))
+    chal_img.append(pygame.image.load("image/challenge/chal_8.png"))
 
 
     support_index = []
@@ -61,7 +78,7 @@ def Map_1_starting(screen) :
     # bgm
     pygame.mixer.init()
     pygame.mixer.music.load("sound/gamebgm.wav")
-    pygame.mixer.music.set_volume(1)  # 1 ~ 0.1
+    pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
 
     pygame.mixer.music.play()
 
@@ -82,11 +99,11 @@ def Map_1_starting(screen) :
 
 
         while True : #Copyright : 노관태
-            timer = Font.render("Time : " + str((10-(curtime-oldtime))),True,(0,0,0)) #Copyright : 노관태
+            timer = Font.render("Time : " + str(int(10-(curtime-oldtime))),True,(0,0,0)) #Copyright : 노관태
 
             screen.blit(back_ground, (0, 0))
             screen.blit(interface, (1030, 0))
-            if(curtime-oldtime > 0) :
+            if(curtime-oldtime < 10) :
                 screen.blit(timer,(850,20))
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -174,8 +191,17 @@ def Map_1_starting(screen) :
                                     break
                                 else:
                                     build_ok = True
-                        if (build_ok == True):
+                        if build_ok == True:
                             build -= 1
+                            if tower1[index].tower_name == "normal tower" :
+                                touer[0] = True
+                            if tower1[index].tower_name == "short tower" :
+                                touer[1] = True
+                            if tower1[index].tower_name == "long tower" :
+                                touer[2] = True
+                            if tower1[index].tower_name == "support tower" :
+                                touer[3] = True
+
                         if position[0] >= 1150 and position[0] <= 1150 + cancel_img.get_width() and \
                                 position[1] >= 615 and position[1] <= 615 + cancel_img.get_height():
                             index -= 1
@@ -254,6 +280,35 @@ def Map_1_starting(screen) :
 
 
 
+            chal = challenge.challenge_1_5_8_9(chal,virus.Virus.AllNum,gold,touer)
+
+            for z in range (0,7,1) :
+                if chal_sv[z] ==0 and chal[z] == 1 :
+                    chal_sv[z] = 2
+                    managetime = time.time()
+
+            for z in range(0, 7, 1):
+                if chal_sv[z] != 0 :
+                    if curtime - managetime < 3 :
+                        scr_giv = font.render("+" + str(chal_scr[z]),True,(0,0,0))
+                        screen.blit(scr_giv,(1075,60))
+                        mon_giv = font.render("+" + str(chal_money[z]), True, (0, 0, 0))
+                        screen.blit(mon_giv, (1190, 60))
+                        if chal_sv[z] == 2 :
+                            gold += int(chal_money[z])
+                            chal_sv[z] =1
+                        screen.blit(chal_img[z],(0,0))
+                    elif curtime - managetime > 3 :
+                        if chal_sv[z] == 2 :
+                            chal_sv[z] =1
+
+
+
+
+
+
+
+
 
 
 
@@ -319,11 +374,19 @@ def Map_1_starting(screen) :
 
 
 
+
+
+
             pygame.display.flip()
             curtime = time.time()
+
         if Gameoverbool :
             GameOver.GameOver(screen,95000,life,gold)
             return 1
+
+        chal = challenge.challenge_6(chal,life)
+
+
 
 
         for event in pygame.event.get():
