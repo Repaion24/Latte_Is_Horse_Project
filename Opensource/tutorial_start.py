@@ -17,9 +17,9 @@ def on_roadt(x, y) :
             return True
         if x >= 100 and x <= 200 and y >= 140 and y <= 380 :
             return True
-        if x >= 200 and x <= 860 and y >= 280 and y <= 380 :
+        if x >= 200 and x <= 980 and y >= 280 and y <= 380 :
             return True
-        if x >= 760 and x <= 860 and y >= 380 and y <= 760 :
+        if x >= 880 and x <= 980 and y >= 380 and y <= 760 :
             return True
     else :
         return True
@@ -72,7 +72,7 @@ def on_road2(x, y) :
     return False
 
 
-def Map_1_starting(screen) :
+def tutorial_starting(screen) :
     chal = [0,0,0,0,0,0,0,0,0]
     chal_sv = [0,0,0,0,0,0,0,0,0]
     touer = [False, False, False, False]
@@ -85,8 +85,8 @@ def Map_1_starting(screen) :
     back_ground = pygame.image.load("image/virus/map2.png")
     interface = pygame.image.load("image/virus/interface.png")
     map1 = map.map(screen)
-    map1.ch = [[120,60],[120,420],[300,420],[300,180],[540,180],[540,420],[780,420],[780,720]]
-    map1.set([0, 60], [1280, 600])
+    map1.ch = [[120,60],[120,300],[900,300],[900,720]]
+    map1.set([0, 60], [900, 720])
 
     chal_img = []
     chal_img.append(pygame.image.load("image/challenge/chal_1.png"))
@@ -143,7 +143,7 @@ def Map_1_starting(screen) :
 
     pygame.mixer.Sound("sound/gamebgm.wav")
     managetime = time.time()
-    viruslist = [[5,0,0,0],[10,0,0,0],[20,10,0,0],[20,0,10,0],[30,30,30,0],[0,70,0,0],[0,0,70,0],[0,70,70,0],[100,50,50,0], [0,0,0,1]]
+    viruslist = [[1,0,0,0],[2,0,0,0],[3,0,0,0],[4,0,0,0],[5,0,0,0]]
     wave = 0
 
     while True :
@@ -261,7 +261,7 @@ def Map_1_starting(screen) :
                                 else:
                                     build_ok = True
 
-                        if on_road1(position[0], position[1]) == False :
+                        if on_roadt(position[0], position[1]) == False :
                             if (build_ok == True) :
                                 build -= 1
                                 if tower1[index].tower_name == "normal tower":# Copyright : 노관태~
@@ -445,16 +445,14 @@ def Map_1_starting(screen) :
                     type_virus = 3
 
                 if count < viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
-                    if curtime - vtimer >= 0.4 :
+                    if curtime - vtimer >= 1 :
                         count += 1
                         vtimer = curtime
                         badguy.append(virus.Virus(type_virus))
                         vindex += 1
                         badguy[vindex].setType()
-                        badguy[vindex].setPos([780, 720])
-                        badguy[vindex].path = [[780, 720], [780, 420], [540, 420], [540, 180], [300, 180], [300, 420],
-                                               [120, 420], [120, 60],
-                                               [0, 60]]
+                        badguy[vindex].setPos([900, 720])
+                        badguy[vindex].path = [[900,720],[900,300],[120,300],[120,60],[0,60]]
 
 
 
@@ -496,7 +494,7 @@ def Map_1_starting(screen) :
                         count = 0
                         gold += 100
                         wave += 1
-                        if wave == 10:
+                        if wave == 5:
                             score += life*100
                             score += gold
                             GameOver.GameOver(screen, score, life, gold)

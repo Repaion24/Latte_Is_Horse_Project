@@ -61,9 +61,9 @@ class Virus: #copyright 이동우
         self.drawNum = 0
 
     def setType(self): #copyright 이동우
-        if self.type == 1:
+        if self.type == 2:
             self.type1()
-        elif self.type == 2:
+        elif self.type == 1:
             self.type2()
         elif self.type == 3:
             self.type3()
@@ -131,19 +131,19 @@ class Virus: #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_1.png")  # 바이러스 이미지
         self.name = "ZIKA virus"
         self.hp = 12  # 바이러스 체력
-        self.dmg = 3  # 바이러스 공격력
+        self.dmg = 1  # 바이러스 공격력
         self.speed = 4  # 바이러스 스피드
 
     def type2(self): #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_2.png")  # 바이러스 이미지
         self.name = "EBOLA virus"
-        self.hp = 50  # 바이러스 체력
+        self.hp = 40  # 바이러스 체력
         self.dmg = 3  # 바이러스 공격력
         self.speed = 1  # 바이러스 스피드
 
     def type3(self): #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_bh.png")  # 바이러스 이미지
         self.name = "CORONA virus"
-        self.hp = 300  # 바이러스 체력
+        self.hp = 700  # 바이러스 체력
         self.dmg = 20  # 바이러스 공격력
         self.speed = 1  # 바이러스 스피드

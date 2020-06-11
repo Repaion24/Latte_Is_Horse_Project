@@ -1,9 +1,5 @@
 import pygame
 
-pygame.init()
-width, height = 1280, 720
-screen = pygame.display.set_mode((width, height))
-
 
 def Tutorial(screen):
     Imgnext = pygame.image.load("tutorial/next.png")
@@ -25,7 +21,7 @@ def Tutorial(screen):
         screen.fill((0,0,0))
 
         if count == 0:
-            return 1
+            count = 0
         if count == 1:
             screen.blit(tImg1, (0,0))
         if count == 2:
@@ -40,6 +36,8 @@ def Tutorial(screen):
             screen.blit(tImg6, (0,0))
         if count == 7:
             screen.blit(tImg7, (0,0))
+        if count == 8:
+            return 1
       # if count == 7:
           # return 2
         screen.blit(Imgnext,(0,720-getu))
@@ -54,8 +52,3 @@ def Tutorial(screen):
                 if position[0] >= 1280 - getx and position[0] <= 1280:
                     if position[1] >= 720 - getu and position[1] <= 720:
                         count += 1
-
-
-
-
-Tutorial(screen)
