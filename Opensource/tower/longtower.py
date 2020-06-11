@@ -6,6 +6,7 @@ class long_tower(tower) :
     def __init__(self) :
         self.x = 0
         self.y = 0
+        self.tower_name = "long tower"
         self.is_support = False
         self.width = 0
         self.height = 0
