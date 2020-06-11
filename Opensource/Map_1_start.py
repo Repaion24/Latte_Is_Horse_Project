@@ -21,6 +21,9 @@ def on_roadt(x, y) :
             return True
         if x >= 760 and x <= 860 and y >= 380 and y <= 760 :
             return True
+    else :
+        return True
+
     return False
 
 def on_road1(x, y) :
@@ -41,6 +44,9 @@ def on_road1(x, y) :
             return True
         if x >= 760 and x <= 860 and y >= 500 and y <= 720 :
             return True
+    else :
+        return True
+
     return False
 
 def on_road2(x, y) :
@@ -61,6 +67,8 @@ def on_road2(x, y) :
             return True
         if x >= 820 and x <= 920 and y >= 380 and y <= 720 :
             return True
+    else :
+        return True
     return False
 
 
@@ -70,6 +78,7 @@ def Map_1_starting(screen) :
     touer = [False, False, False, False]
     chal_scr = [500, 1000, 2000, 4000,6000,2000, 500, 3000, 5000] #도전과제 달성시 보상
     chal_money = [100,200,350,550,700,200,100,500,0]
+    score = 0
 
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
@@ -133,6 +142,7 @@ def Map_1_starting(screen) :
     pygame.mixer.music.play()
 
     pygame.mixer.Sound("sound/gamebgm.wav")
+    managetime = time.time()
 
 
     while True :
@@ -144,6 +154,9 @@ def Map_1_starting(screen) :
 
         oldtime = time.time()
         curtime = time.time()
+
+
+
 
 
 
@@ -258,6 +271,15 @@ def Map_1_starting(screen) :
                         if position[0] >= 1150 and position[0] <= 1150 + cancel_img.get_width() and \
                                 position[1] >= 615 and position[1] <= 615 + cancel_img.get_height():
                             index -= 1
+                            build -= 1
+                            if tower1[index].tower_name == "normal tower":  # Copyright : 노관태~
+                                gold += 50
+                            if tower1[index].tower_name == "short tower":
+                                gold += 100
+                            if tower1[index].tower_name == "long tower":
+                                gold += 100
+                            if tower1[index].tower_name == "support tower":  # ~ Copyright : 노관태
+                                gold += 100
                             if tower1[i].is_support:
                                 support_index.pop()
                             tower1.pop()  # ~made by 김재희
@@ -281,8 +303,20 @@ def Map_1_starting(screen) :
                                 if tower1[i].tower_attack(game_timer):
                                     badguy[j].hp -= tower1[i].damage + tower1[i].plus_damage
                                     if badguy[j].hp <= 0:
+                                        if badguy[j].name == "MERS virus":  # Copyright : 노관태~
+                                            score += 10
+                                            gold += 10
+                                        if badguy[j].name == "ZIKA virus":
+                                            score += 15
+                                            gold += 12
+                                        if badguy[j].name == "EBOLA virus":
+                                            gold += 17
+                                        if badguy[j].name == "CORONA virus":  # ~ Copyright : 노관태
+                                            score += 300
+                                            gold += 100
                                         badguy[j].dead()
                                         badguy.pop(j)
+
                                         if selectNum == j:
                                             selectNum = -1
                                         elif selectNum > j:
@@ -333,6 +367,7 @@ def Map_1_starting(screen) :
 
 
 
+
             chal = challenge.challenge_1_5_8_9(chal,virus.Virus.AllNum,gold,touer)
 
             for z in range (0,7,1) :
@@ -341,20 +376,43 @@ def Map_1_starting(screen) :
                     managetime = time.time()
 
             for z in range(0, 7, 1):
-                if chal_sv[z] != 0 :
+                if chal_sv[z] == 2 or chal_sv[z] == 3 :
                     if curtime - managetime < 3 :
                         scr_giv = font.render("+" + str(chal_scr[z]),True,(0,0,0))
-                        screen.blit(scr_giv,(1075,60))
+                        screen.blit(scr_giv,(150,680))
                         mon_giv = font.render("+" + str(chal_money[z]), True, (0, 0, 0))
                         screen.blit(mon_giv, (1190, 60))
                         if chal_sv[z] == 2 :
+                            score += int(chal_scr[z])
                             gold += int(chal_money[z])
-                            chal_sv[z] =1
+                            chal_sv[z] =3
                         screen.blit(chal_img[z],(0,0))
                     elif curtime - managetime > 3 :
-                        if chal_sv[z] == 2 :
+                        if chal_sv[z] == 3 :
                             chal_sv[z] =1
 
+            Score_print = Font.render("Score : " + str(int(score)), True, (0, 0, 0))
+            screen.blit(Score_print, (0, 620))
+
+            chal = challenge.challenge_6(chal, life)
+            if chal_sv[7] == 0 and chal[7] == 1:
+                chal_sv[7] = 2
+                managetime = time.time()
+
+            if chal_sv[7] == 2 or chal_sv[7] == 3:
+                if curtime - managetime < 3:
+                    scr_giv = font.render("+" + str(chal_scr[7]), True, (0, 0, 0))
+                    screen.blit(scr_giv, (150, 680))
+                    mon_giv = font.render("+" + str(chal_money[7]), True, (0, 0, 0))
+                    screen.blit(mon_giv, (1190, 60))
+                    if chal_sv[7] == 2:
+                        score += int(chal_scr[7])
+                        gold += int(chal_money[7])
+                        chal_sv[7] = 3
+                    screen.blit(chal_img[7], (0, 0))
+                elif curtime - managetime > 3:
+                    if chal_sv[7] == 3:
+                        chal_sv[7] = 1
 
 
 
@@ -366,8 +424,7 @@ def Map_1_starting(screen) :
 
 
 
-
-            if(curtime-oldtime > 2) :
+            if(curtime-oldtime > 10) :
                 # 타이머 구현 #copyright 이동우
 
                 if count < 40 :
@@ -381,14 +438,10 @@ def Map_1_starting(screen) :
                         badguy[vindex].path = [[780, 720], [780, 420], [540, 420], [540, 180], [300, 180], [300, 420],
                                                [120, 420], [120, 60],
                                                [0, 60]]
+
                 type_virus = count//10
 
-                # 문구 출력 #copyright 이동우
-                virus.draw_text("remaining virus : ", screen, 110, 20, BLACK)
-                virus.draw_text(str(len(badguy)), screen, 210, 20, BLACK)
-                #virus.draw_text(str(virus.Virus.AllNum), screen, 210, 40, BLACK)
-                if life < 0:
-                    virus.draw_text("Game over", screen, 640, 300, BLACK)
+
 
                 #바이러스 좌표 조정 #copyright 이동우
                 for n in range(0, len(badguy)):
@@ -423,6 +476,8 @@ def Map_1_starting(screen) :
                     break
                 if count >= 40 :
                     if len(badguy) == 0 :
+                        count = 0
+                        gold += 200
                         break
 
 
@@ -434,10 +489,15 @@ def Map_1_starting(screen) :
             curtime = time.time()
 
         if Gameoverbool :
-            GameOver.GameOver(screen,95000,life,gold)
+            GameOver.GameOver(screen,score,life,gold)
             return 1
 
-        chal = challenge.challenge_6(chal,life)
+
+
+
+
+
+
 
 
 

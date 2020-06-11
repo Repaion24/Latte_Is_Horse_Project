@@ -53,8 +53,8 @@ class Virus: #copyright 이동우
         self.distance=0
         self.name = "MERS virus"
         self.hp = 20 #바이러스 체력
-        self.dmg = 5 #바이러스 공격력
-        self.speed = 1 #바이러스 스피드
+        self.dmg = 1 #바이러스 공격력
+        self.speed = 2 #바이러스 스피드
         self.path = [[1000,600],[1000,100],[600,100],[600,600],[100,600],[100,300],[300,300],[300,100],[0,100]] #변곡점
         self.path_index = 0
         self.drawterm = 1
@@ -131,19 +131,19 @@ class Virus: #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_1.png")  # 바이러스 이미지
         self.name = "ZIKA virus"
         self.hp = 12  # 바이러스 체력
-        self.dmg = 5  # 바이러스 공격력
-        self.speed = 2  # 바이러스 스피드
+        self.dmg = 3  # 바이러스 공격력
+        self.speed = 4  # 바이러스 스피드
 
     def type2(self): #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_2.png")  # 바이러스 이미지
         self.name = "EBOLA virus"
-        self.hp = 12  # 바이러스 체력
-        self.dmg = 5  # 바이러스 공격력
+        self.hp = 50  # 바이러스 체력
+        self.dmg = 3  # 바이러스 공격력
         self.speed = 1  # 바이러스 스피드
 
     def type3(self): #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_bh.png")  # 바이러스 이미지
-        self.name = " CORONA virus"
-        self.hp = 12  # 바이러스 체력
-        self.dmg = 5  # 바이러스 공격력
+        self.name = "CORONA virus"
+        self.hp = 300  # 바이러스 체력
+        self.dmg = 20  # 바이러스 공격력
         self.speed = 1  # 바이러스 스피드
