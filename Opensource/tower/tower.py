@@ -5,6 +5,7 @@ class tower :
     def __init__(self):
         self.x = 0
         self.y = 0
+        self.tower_name = "normal tower"
         self.is_support = False
         self.width = 0
         self.height = 0
@@ -28,6 +29,7 @@ class tower :
     def blit_tower(self, screen):
         self.draw_menu(screen)
         self.draw_surface(screen)
+        self.draw_info(screen)
         screen.blit(self.Timage[self.attack], \
                     (self.x - self.Timage[self.attack].get_width()/2, self.y - self.Timage[self.attack].get_height()/2))
 
@@ -38,11 +40,23 @@ class tower :
                 return True
         return False
 
+    def draw_info(self, screen):
+        if self.selected :
+            tifont = pygame.font.Font(None, 24)
+            tower_info = tifont.render(self.tower_name, True, (255, 255, 255))
+            tower_damage = tifont.render("damage : " + str(self.damage+self.plus_damage), True, (255, 255, 255))
+            tower_range = tifont.render("range : " + str(self.range), True, (255, 255, 255))
+            tower_speed = tifont.render("attack speed : " + str(self.speed), True, (255, 255, 255))
+            screen.blit(tower_info, (1065, 365))
+            screen.blit(tower_damage, (1065, 385))
+            screen.blit(tower_range, (1065, 405))
+            screen.blit(tower_speed, (1065, 425))
+
     def draw_menu(self, screen):
         if self.selected:
             tfont = pygame.font.Font(None, 26)
-            sell_font = tfont.render("Sell : " + str(self.sell_price[self.level]), True, (255,255,255))
-            upgrade_font = tfont.render("Upgrade : " + str(self.upgrade_price[self.level]), True, (255,255,255))
+            sell_font = tfont.render("Sell : " + str(self.sell_price[self.level]), True, (255, 255, 255))
+            upgrade_font = tfont.render("Upgrade : " + str(self.upgrade_price[self.level]), True, (255, 255, 255))
             screen.blit(self.sell, (1048, 512))
             screen.blit(sell_font, (1068, 532))
             screen.blit(self.upgrade, (1048, 459))

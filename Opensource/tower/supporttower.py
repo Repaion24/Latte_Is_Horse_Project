@@ -8,6 +8,7 @@ class support_tower(tower) :
         self.x = 0
         self.y = 0
         self.is_support = True
+        self.tower_name = "support tower"
         self.width = 0
         self.height = 0
         self.plus_damage = 2
@@ -31,3 +32,13 @@ class support_tower(tower) :
         self.range += 25
         self.plus_damage += 1
         return self.upgrade_price[self.level-1]
+
+    def draw_info(self, screen):
+        if self.selected :
+            tifont = pygame.font.Font(None, 24)
+            tower_info = tifont.render(self.tower_name, True, (255, 255, 255))
+            tower_damage = tifont.render("up damage : " + str(self.plus_damage), True, (255, 255, 255))
+            tower_range = tifont.render("range : " + str(self.range), True, (255, 255, 255))
+            screen.blit(tower_info, (1065, 365))
+            screen.blit(tower_damage, (1065, 385))
+            screen.blit(tower_range, (1065, 405))
