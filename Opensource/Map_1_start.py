@@ -58,6 +58,14 @@ def Map_1_starting(screen) :
 
     count = 0
     type_virus = 0
+    # bgm
+    pygame.mixer.init()
+    pygame.mixer.music.load("sound/gamebgm.wav")
+    pygame.mixer.music.set_volume(1)  # 1 ~ 0.1
+
+    pygame.mixer.music.play()
+
+    pygame.mixer.Sound("sound/gamebgm.wav")
 
 
     while True :
