@@ -38,7 +38,7 @@ def draw_text(text, surface, x, y, main_color): #copyright 이동우
 class Virus: #copyright 이동우
 
     virusNum =0 #클래스 변수, 현재 맵에 있는 바이러스 수
-    maxNum =0 #현재 맵에서 만들 수 있는 바이러스 수
+    maxNum = 0 #현재 맵에서 만들 수 있는 바이러스 수
     AllNum = 0 #여태까지 죽인 모든 바이러스 수
 
     def __init__(self,type=0): #copyright 이동우

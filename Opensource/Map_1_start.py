@@ -11,7 +11,57 @@ from tower.supporttower import support_tower
 
 
 
+def on_roadt(x, y) :
+    if x <= 1020 :
+        if x >= 0 and x <= 200 and y >= 40 and y <= 140:
+            return True
+        if x >= 100 and x <= 200 and y >= 140 and y <= 380 :
+            return True
+        if x >= 200 and x <= 860 and y >= 280 and y <= 380 :
+            return True
+        if x >= 760 and x <= 860 and y >= 380 and y <= 760 :
+            return True
+    return False
 
+def on_road1(x, y) :
+    if x <= 1020 :
+        if x >= 0 and x <= 200 and y >= 40 and y <= 160 :
+            return True
+        if x >= 100 and x <= 200 and y >= 160 and y <= 500 :
+            return True
+        if x >= 200 and x <= 380 and y >= 400 and y <= 500 :
+            return True
+        if x >= 280 and x <= 380 and y >= 160 and y <= 400 :
+            return True
+        if x >= 380 and x <= 620 and y >= 160 and y <= 260 :
+            return True
+        if x >= 520 and x <= 620 and y >= 260 and y <= 500 :
+            return True
+        if x >= 620 and x <= 860 and y >= 400 and y <= 500 :
+            return True
+        if x >= 760 and x <= 860 and y >= 500 and y <= 720 :
+            return True
+    return False
+
+def on_road2(x, y) :
+    if x <= 1020 :
+        if x >= 0 and x <= 500 and y >= 40 and y <= 140 :
+            return True
+        if x >= 400 and x <= 500 and y >= 140 and y <= 380 :
+            return True
+        if x >= 100 and x <= 400 and y >= 280 and y <= 380 :
+            return True
+        if x >= 100 and x <= 200 and y >= 380 and y <= 620 :
+            return True
+        if x >= 200 and x <= 680 and y >= 520 and y <= 620 :
+            return True
+        if x >= 580 and x <= 680 and y >= 280 and y <= 520 :
+            return True
+        if x >= 680 and x <= 920 and y >= 280 and y <= 380 :
+            return True
+        if x >= 820 and x <= 920 and y >= 380 and y <= 720 :
+            return True
+    return False
 
 
 def Map_1_starting(screen) :
@@ -109,17 +159,17 @@ def Map_1_starting(screen) :
                 if event.type == pygame.MOUSEBUTTONDOWN:
                     position = pygame.mouse.get_pos()
 
-                    for n in range(0, len(badguy)): # Copyright : 이동우 ~
-                        badguy[n].calDistance(position[0], position[1])
-                    for i in range(0, len(badguy)):
-                        if badguy[i].boolDtc():
-                            selectNum = i
-                            break
-                        selectNum = -1 # ~ Copyright : 이동우
+                    if build == 0:
 
+                        for n in range(0, len(badguy)):  # Copyright : 이동우 ~
+                            badguy[n].calDistance(position[0], position[1])
+                        for i in range(0, len(badguy)):
+                            if badguy[i].boolDtc():
+                                selectNum = i
+                                break
+                            selectNum = -1  # ~ Copyright : 이동우
 
-                    if build == 0:  # made by 김재희~
-                        for i in range(0, len(tower1)):
+                        for i in range(0, len(tower1)):  # made by 김재희~
                             if tower1[i].selected:
                                 if position[0] >= 1048 and position[0] <= 1048 + tower1[i].sell.get_width():
                                     if position[1] >= 512 and position[1] <= 512 + tower1[i].sell.get_height():
@@ -180,34 +230,37 @@ def Map_1_starting(screen) :
                                 tower1.append(support_tower())
                                 support_index.append(index)
                                 tower1[index].timer = time.time()
+
                     elif build == 1:
                         for i in range(0, len(tower1)):
                             if (i != index):
-                                if (position[0] <= tower1[i].x + timg[0].get_width() / 2 and position[0] >= tower1[
-                                    i].x - timg[0].get_width() / 2 \
-                                        and position[1] <= tower1[i].y + timg[0].get_height() / 2 and position[1] >=
-                                        tower1[i].y - timg[0].get_height() / 2):
+                                if (position[0] <= tower1[i].x + timg[0].get_width()  and position[0] >= tower1[
+                                    i].x - timg[0].get_width() \
+                                        and position[1] <= tower1[i].y + timg[0].get_height() and position[1] >=
+                                        tower1[i].y - timg[0].get_height()):
                                     build_ok = False
                                     break
                                 else:
                                     build_ok = True
-                        if build_ok == True:
-                            build -= 1
-                            if tower1[index].tower_name == "normal tower" :
-                                touer[0] = True
-                            if tower1[index].tower_name == "short tower" :
-                                touer[1] = True
-                            if tower1[index].tower_name == "long tower" :
-                                touer[2] = True
-                            if tower1[index].tower_name == "support tower" :
-                                touer[3] = True
+
+                        if on_road1(position[0], position[1]) == False :
+                            if (build_ok == True) :
+                                build -= 1
+                                if tower1[index].tower_name == "normal tower":# Copyright : 노관태~
+                                    touer[0] = True
+                                if tower1[index].tower_name == "short tower":
+                                    touer[1] = True
+                                if tower1[index].tower_name == "long tower":
+                                    touer[2] = True
+                                if tower1[index].tower_name == "support tower":# ~ Copyright : 노관태
+                                    touer[3] = True
 
                         if position[0] >= 1150 and position[0] <= 1150 + cancel_img.get_width() and \
                                 position[1] >= 615 and position[1] <= 615 + cancel_img.get_height():
                             index -= 1
                             if tower1[i].is_support:
                                 support_index.pop()
-                            tower1.pop()
+                            tower1.pop()  # ~made by 김재희
 
             if build == 1:  # made by 김재희~
                 position = pygame.mouse.get_pos()
@@ -256,14 +309,14 @@ def Map_1_starting(screen) :
                                 exist = True
                                 tower1[i].tower_attack(game_timer)
                     if exist == False:
-                        tower1[i].attack = 0  # ~made by 김재희
+                        tower1[i].attack = 0
 
             for i in range(0, len(tower1)):
                 tower1[i].blit_tower(screen)
 
             for i in range(0, len(enemy1)):
                 screen.blit(enemy1[i].enemy_img, (
-                enemy1[i].x - enemy1[i].enemy_img.get_width() / 2, enemy1[i].y - enemy1[i].enemy_img.get_height() / 2))
+                enemy1[i].x - enemy1[i].enemy_img.get_width() / 2, enemy1[i].y - enemy1[i].enemy_img.get_height() / 2)) # ~made by 김재희
 
             gold_font = font.render(str(gold), True, (0, 0, 0))
             life_font = font.render(str(life),True,(0,0,0))
@@ -333,7 +386,7 @@ def Map_1_starting(screen) :
                 # 문구 출력 #copyright 이동우
                 virus.draw_text("remaining virus : ", screen, 110, 20, BLACK)
                 virus.draw_text(str(len(badguy)), screen, 210, 20, BLACK)
-                #virus.draw_text(str(selectNum), screen, 210, 40, BLACK)
+                #virus.draw_text(str(virus.Virus.AllNum), screen, 210, 40, BLACK)
                 if life < 0:
                     virus.draw_text("Game over", screen, 640, 300, BLACK)
 
