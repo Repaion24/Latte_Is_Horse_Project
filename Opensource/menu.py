@@ -43,6 +43,13 @@ def start_menu1 (screen):
                 exit(0)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.mixer.init()
+                pygame.mixer.music.load("sound/click.wav")
+                pygame.mixer.music.set_volume(1)  # 1 ~ 0.1
+
+                pygame.mixer.music.play()
+
+                pygame.mixer.Sound("sound/click.wav")
                 position = pygame.mouse.get_pos()
                 if position[0] > 384 and position[0] < 896:
                     if position[1] > 576 and position[1] < 704:
@@ -158,6 +165,13 @@ def start_menu2 (screen):
                 exit(0)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.mixer.init()
+                pygame.mixer.music.load("sound/click.wav")
+                pygame.mixer.music.set_volume(1)  # 1 ~ 0.1
+
+                pygame.mixer.music.play()
+
+                pygame.mixer.Sound("sound/click.wav")
                 position = pygame.mouse.get_pos()
                 if position[0] > 384 and position[0] < 896:
                     if position[1] > 576 and position[1] < 704:
