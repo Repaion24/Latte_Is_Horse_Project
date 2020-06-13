@@ -35,6 +35,9 @@ def draw_text(text, surface, x, y, main_color): #copyright 이동우
     text_rect.centery = y
     surface.blit(text_obj, text_rect)
 
+def game_reset():
+    Virus.AllNum = 0
+
 class Virus: #copyright 이동우
 
     virusNum =0 #클래스 변수, 현재 맵에 있는 바이러스 수
@@ -50,7 +53,7 @@ class Virus: #copyright 이동우
         self.pos =[0,0]
         self.center = [0,0]
         self.radian = math.sqrt(pow(self.x_size,2)+pow(self.y_size,2))/2
-        self.distance=0
+        self.distance = 0
         self.name = "MERS virus"
         self.hp = 20 #바이러스 체력
         self.dmg = 1 #바이러스 공격력
@@ -91,6 +94,8 @@ class Virus: #copyright 이동우
 
     def dead(self): #바이러스기 죽으면 전체 바이러스 수 1 감소  #copyright 이동우
         Virus.AllNum = Virus.AllNum +1
+
+
 
     def move(self): #바이러스가 움직이는 좌표 #copyright 이동우
         x = self.pos[0]
@@ -144,6 +149,6 @@ class Virus: #copyright 이동우
     def type3(self): #copyright 이동우
         self.img = pygame.image.load("image/virus/virus_bh.png")  # 바이러스 이미지
         self.name = "CORONA virus"
-        self.hp = 700  # 바이러스 체력
+        self.hp = 1000  # 바이러스 체력
         self.dmg = 20  # 바이러스 공격력
-        self.speed = 1  # 바이러스 스피드
+        self.speed = 2  # 바이러스 스피드

@@ -65,7 +65,7 @@ def on_road2(x, y) :
             return True
         if x >= 740 and x <= 980 and y >= 280 and y <= 380 :
             return True
-        if x >= 980 and x <= 1020 and y >= 380 and y <= 720 :
+        if x >= 880 and x <= 980 and y >= 380 and y <= 720 :
             return True
     else :
         return True
@@ -79,6 +79,8 @@ def Map_2_starting(screen) :
     chal_scr = [500, 1000, 2000, 4000,6000,2000, 500, 3000, 5000] #도전과제 달성시 보상
     chal_money = [100,200,350,550,700,200,100,500,0]
     score = 0
+    virus.Virus.Allnum = 0
+    virus.game_reset()
 
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
@@ -140,12 +142,12 @@ def Map_2_starting(screen) :
     pygame.mixer.music.load("sound/seabgm.wav")
     pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
 
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(-1)
 
     pygame.mixer.Sound("sound/seabgm.wav")
     managetime = time.time()
-    viruslist = [[10,0,0,0],[50,0,0,0],[50,50,0,0],[50,0,50,0],[50,50,50,0],[100,30,30,0],[0,200,0,0],[0,0,200,0],[0,300,300,0], [0,0,0,1]\
-        ,[100,0,0,1],[100,30,0,1],[100,0,30,1],[100,30,30,1],[0,500,0,1],[0,0,500,1],[0,500,500,1],[500,500,500,1],[100,100,100,10], [0,0,0,100], [0,0,0,1]]
+    viruslist = [[10,0,0,0],[50,0,0,0],[50,40,0,0],[50,0,40,0],[50,50,50,0],[100,30,30,0],[0,200,0,0],[0,0,200,0],[0,300,300,0], [0,0,0,1]\
+        ,[100,0,0,2],[100,50,0,3],[100,0,50,4],[100,50,50,5],[0,500,0,6],[0,0,500,7],[0,500,500,8],[500,500,500,9],[100,100,100,10], [0,0,0,100], [0,0,0,1]]
     wave = 0
 
     while True :
@@ -198,10 +200,9 @@ def Map_2_starting(screen) :
                                             for k in range(0, len(tower1)):
                                                 if tower1[k].is_support == False:
                                                     tower1[k].plus_damage = 0
-                                        for k in range(i, len(tower1)) :
-                                            for j in range(0, len(support_index)) :
-                                                if support_index[j] > k :
-                                                    support_index[j] -= 1
+                                        for j in range(0, len(support_index)):
+                                            if support_index[j] > i :
+                                                support_index[j] -= 1
                                         tower1.pop(i)
                                         index -= 1
                                         break
@@ -312,13 +313,13 @@ def Map_2_starting(screen) :
                                     if badguy[j].hp <= 0:
                                         if badguy[j].name == "MERS virus":  # Copyright : 노관태~
                                             score += 10
-                                            gold += 5
+                                            gold += 7
                                         if badguy[j].name == "ZIKA virus":
                                             score += 15
-                                            gold += 6
+                                            gold += 8
                                         if badguy[j].name == "EBOLA virus":
                                             score += 20
-                                            gold += 8
+                                            gold += 10
                                         if badguy[j].name == "CORONA virus":  # ~ Copyright : 노관태
                                             score += 300
                                             gold += 100
@@ -437,17 +438,22 @@ def Map_2_starting(screen) :
             if(curtime-oldtime > 10) :
                 # 타이머 구현 #copyright 이동우
 
-                if count < viruslist[wave][0] :
+                if count < viruslist[wave][0]:
                     type_virus = 0
-                if count > viruslist[wave][0] :
+                elif count >= viruslist[wave][0] and count < viruslist[wave][0] + viruslist[wave][1]:
                     type_virus = 1
-                if count > viruslist[wave][0] + viruslist[wave][1]:
+                elif count >= viruslist[wave][0] + viruslist[wave][1] and count < viruslist[wave][0] + viruslist[wave][
+                    1] + viruslist[wave][2]:
                     type_virus = 2
-                if count > viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
+                elif count >= viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
                     type_virus = 3
 
                 if count < viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
-                    if curtime - vtimer >= 0.4 :
+                    if wave < 10 :
+                        k = 1
+                    else :
+                        k = 2
+                    if curtime - vtimer >= 0.4 / (k + (wave + 1) / 10) :
                         count += 1
                         vtimer = curtime
                         badguy.append(virus.Virus(type_virus))
@@ -455,6 +461,8 @@ def Map_2_starting(screen) :
                         badguy[vindex].setType()
                         badguy[vindex].setPos([900, 720])
                         badguy[vindex].path = [[900,720],[900,300],[660,300],[660,540],[120,540],[120,300],[420,300],[420,60],[0,60]]
+                        if wave >= 10 :
+                            badguy[vindex].hp = badguy[vindex].hp * 3
 
 
 
@@ -488,7 +496,7 @@ def Map_2_starting(screen) :
 
 
 
-                if(life <=0) :
+                if(life <= 0) :
                     # copyright -shin hyuk jin
                     pygame.mixer.init()
                     pygame.mixer.music.load("sound/damage.wav")
@@ -504,7 +512,7 @@ def Map_2_starting(screen) :
                         count = 0
                         gold += 100
                         wave += 1
-                        if wave == 10:
+                        if wave == 20:
                             #copyright-shin
                             pygame.mixer.init()
                             pygame.mixer.music.load("sound/roundswap.wav")

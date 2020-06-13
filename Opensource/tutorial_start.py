@@ -79,6 +79,8 @@ def tutorial_starting(screen) :
     chal_scr = [500, 1000, 2000, 4000,6000,2000, 500, 3000, 5000] #도전과제 달성시 보상
     chal_money = [100,200,350,550,700,200,100,500,0]
     score = 0
+    virus.Virus.Allnum = 0
+    virus.game_reset()
 
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
@@ -139,7 +141,7 @@ def tutorial_starting(screen) :
     pygame.mixer.music.load("sound/tutorbgm.wav")
     pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
 
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(-1)
 
     pygame.mixer.Sound("sound/tutorbgm.wav")
     managetime = time.time()
@@ -196,10 +198,9 @@ def tutorial_starting(screen) :
                                             for k in range(0, len(tower1)):
                                                 if tower1[k].is_support == False:
                                                     tower1[k].plus_damage = 0
-                                        for k in range(i, len(tower1)) :
-                                            for j in range(0, len(support_index)) :
-                                                if support_index[j] > k :
-                                                    support_index[j] -= 1
+                                        for j in range(0, len(support_index)):
+                                            if support_index[j] > i:
+                                                support_index[j] -= 1
                                         tower1.pop(i)
                                         index -= 1
                                         break
@@ -310,13 +311,13 @@ def tutorial_starting(screen) :
                                     if badguy[j].hp <= 0:
                                         if badguy[j].name == "MERS virus":  # Copyright : 노관태~
                                             score += 10
-                                            gold += 5
+                                            gold += 7
                                         if badguy[j].name == "ZIKA virus":
                                             score += 15
-                                            gold += 6
+                                            gold += 8
                                         if badguy[j].name == "EBOLA virus":
                                             score += 20
-                                            gold += 8
+                                            gold += 10
                                         if badguy[j].name == "CORONA virus":  # ~ Copyright : 노관태
                                             score += 300
                                             gold += 100
@@ -435,13 +436,14 @@ def tutorial_starting(screen) :
             if(curtime-oldtime > 10) :
                 # 타이머 구현 #copyright 이동우
 
-                if count < viruslist[wave][0] :
+                if count < viruslist[wave][0]:
                     type_virus = 0
-                if count > viruslist[wave][0] :
+                elif count >= viruslist[wave][0] and count < viruslist[wave][0] + viruslist[wave][1]:
                     type_virus = 1
-                if count > viruslist[wave][0] + viruslist[wave][1]:
+                elif count >= viruslist[wave][0] + viruslist[wave][1] and count < viruslist[wave][0] + viruslist[wave][
+                    1] + viruslist[wave][2]:
                     type_virus = 2
-                if count > viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
+                elif count >= viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
                     type_virus = 3
 
                 if count < viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :

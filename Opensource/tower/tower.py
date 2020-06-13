@@ -80,7 +80,7 @@ class tower :
     def upgrade_tower(self):
         self.level += 1
         self.range += 25
-        self.damage += 2
+        self.damage += 3
         return self.upgrade_price[self.level-1]
 
     def tower_attack(self, gtimer):

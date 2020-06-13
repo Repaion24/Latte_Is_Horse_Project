@@ -79,6 +79,8 @@ def Map_1_starting(screen) :
     chal_scr = [500, 1000, 2000, 4000,6000,2000, 500, 3000, 5000] #도전과제 달성시 보상
     chal_money = [100,200,350,550,700,200,100,500,0]
     score = 0
+    virus.Virus.Allnum = 0
+    virus.game_reset()
 
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
@@ -139,7 +141,7 @@ def Map_1_starting(screen) :
     pygame.mixer.music.load("sound/gamebgm.wav")
     pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
 
-    pygame.mixer.music.play()
+    pygame.mixer.music.play(-1)
 
     pygame.mixer.Sound("sound/gamebgm.wav")
     managetime = time.time()
@@ -196,10 +198,9 @@ def Map_1_starting(screen) :
                                             for k in range(0, len(tower1)):
                                                 if tower1[k].is_support == False:
                                                     tower1[k].plus_damage = 0
-                                        for k in range(i, len(tower1)) :
-                                            for j in range(0, len(support_index)) :
-                                                if support_index[j] > k :
-                                                    support_index[j] -= 1
+                                        for j in range(0, len(support_index)):
+                                            if support_index[j] > i:
+                                                support_index[j] -= 1
                                         tower1.pop(i)
                                         index -= 1
                                         break
@@ -303,20 +304,20 @@ def Map_1_starting(screen) :
                         if (tower1[i].is_support != True):
                             if (badguy[j].center[0] - tower1[i].x) * (badguy[j].center[0] - tower1[i].x) \
                                     + (badguy[j].center[1] - tower1[i].y) * (badguy[j].center[1] - tower1[i].y) <= tower1[i].range * \
-                                    tower1[i].range:
+                                    tower1[i].range :
                                 attack_on = True
                                 if tower1[i].tower_attack(game_timer):
                                     badguy[j].hp -= tower1[i].damage + tower1[i].plus_damage
                                     if badguy[j].hp <= 0:
                                         if badguy[j].name == "MERS virus":  # Copyright : 노관태~
                                             score += 10
-                                            gold += 5
+                                            gold += 7
                                         if badguy[j].name == "ZIKA virus":
                                             score += 15
-                                            gold += 6
+                                            gold += 8
                                         if badguy[j].name == "EBOLA virus":
                                             score += 20
-                                            gold += 8
+                                            gold += 10
                                         if badguy[j].name == "CORONA virus":  # ~ Copyright : 노관태
                                             score += 300
                                             gold += 100
@@ -438,15 +439,15 @@ def Map_1_starting(screen) :
 
                 if count < viruslist[wave][0] :
                     type_virus = 0
-                if count > viruslist[wave][0] :
+                elif count >= viruslist[wave][0] and count < viruslist[wave][0] + viruslist[wave][1] :
                     type_virus = 1
-                if count > viruslist[wave][0] + viruslist[wave][1]:
+                elif count >= viruslist[wave][0] + viruslist[wave][1] and count < viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
                     type_virus = 2
-                if count > viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
+                elif count >= viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
                     type_virus = 3
 
                 if count < viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
-                    if curtime - vtimer >= 0.5 / (1 + (wave + 1) / 5):
+                    if curtime - vtimer >= 0.5 / (1 + (wave + 1) / 10):
                         count += 1
                         vtimer = curtime
                         badguy.append(virus.Virus(type_virus))
@@ -500,8 +501,8 @@ def Map_1_starting(screen) :
 
                     pygame.mixer.Sound("sound/damage.wav")
                     Gameoverbool = True
-                    virus.Virus.Allnum = 0
                     break
+
                 if count >= viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
                     if len(badguy) == 0 :
                         count = 0
@@ -519,7 +520,6 @@ def Map_1_starting(screen) :
                             score += life*100
                             score += gold
                             GameOver.GameClear(screen, score, life, gold)
-                            virus.Virus.Allnum = 0
                             return 1
                         break
 
@@ -534,7 +534,6 @@ def Map_1_starting(screen) :
 
         if Gameoverbool :
             GameOver.GameOver(screen,score,life,gold)
-            virus.Virus.Allnum = 0
             return 1
 
 

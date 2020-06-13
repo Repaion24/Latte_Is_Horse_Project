@@ -10,7 +10,7 @@ class long_tower(tower) :
         self.is_support = False
         self.width = 0
         self.height = 0
-        self.damage = 7
+        self.damage = 6
         self.plus_damage = 0
         self.range = 150
         self.speed = 1.5
