@@ -134,7 +134,7 @@ def Map_1_starting(screen) :
 
     count = 0
     type_virus = 0
-    # bgm
+    # bgm - shin
     pygame.mixer.init()
     pygame.mixer.music.load("sound/gamebgm.wav")
     pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
@@ -143,7 +143,8 @@ def Map_1_starting(screen) :
 
     pygame.mixer.Sound("sound/gamebgm.wav")
     managetime = time.time()
-
+    viruslist = [[5,0,0,0],[10,0,0,0],[20,10,0,0],[20,0,10,0],[30,30,30,0],[0,70,0,0],[0,0,70,0],[0,70,70,0],[100,50,50,0], [0,0,0,1]]
+    wave = 0
 
     while True :
 
@@ -195,6 +196,10 @@ def Map_1_starting(screen) :
                                             for k in range(0, len(tower1)):
                                                 if tower1[k].is_support == False:
                                                     tower1[k].plus_damage = 0
+                                        for k in range(i, len(tower1)) :
+                                            for j in range(0, len(support_index)) :
+                                                if support_index[j] > k :
+                                                    support_index[j] -= 1
                                         tower1.pop(i)
                                         index -= 1
                                         break
@@ -220,8 +225,8 @@ def Map_1_starting(screen) :
                                 tower1[index].timer = time.time()
                         if position[0] >= 1170 and position[0] <= 1170 + timg[1].get_width() and \
                                 position[1] >= 110 and position[1] <= 110 + timg[1].get_height():
-                            if gold >= 100:
-                                gold -= 100
+                            if gold >= 150:
+                                gold -= 150
                                 index += 1
                                 build += 1
                                 tower1.append(short_tower())
@@ -236,8 +241,8 @@ def Map_1_starting(screen) :
                                 tower1[index].timer = time.time()
                         if position[0] >= 1170 and position[0] <= 1170 + timg[3].get_width() and \
                                 position[1] >= 230 and position[1] <= 230 + timg[3].get_height():
-                            if gold >= 100:
-                                gold -= 100
+                            if gold >= 200:
+                                gold -= 200
                                 index += 1
                                 build += 1
                                 tower1.append(support_tower())
@@ -247,10 +252,10 @@ def Map_1_starting(screen) :
                     elif build == 1:
                         for i in range(0, len(tower1)):
                             if (i != index):
-                                if (position[0] <= tower1[i].x + timg[0].get_width()  and position[0] >= tower1[
-                                    i].x - timg[0].get_width() \
-                                        and position[1] <= tower1[i].y + timg[0].get_height() and position[1] >=
-                                        tower1[i].y - timg[0].get_height()):
+                                if (position[0] <= tower1[i].x + timg[0].get_width() / 2 + 15 and position[0] >= tower1[
+                                    i].x - timg[0].get_width() / 2 - 15\
+                                        and position[1] <= tower1[i].y + timg[0].get_height() / 2 + 15 and position[1] >=
+                                        tower1[i].y - timg[0].get_height() / 2 - 15):
                                     build_ok = False
                                     break
                                 else:
@@ -270,18 +275,18 @@ def Map_1_starting(screen) :
 
                         if position[0] >= 1150 and position[0] <= 1150 + cancel_img.get_width() and \
                                 position[1] >= 615 and position[1] <= 615 + cancel_img.get_height():
-                            index -= 1
                             build -= 1
                             if tower1[index].tower_name == "normal tower":  # Copyright : 노관태~
                                 gold += 50
                             if tower1[index].tower_name == "short tower":
-                                gold += 100
+                                gold += 150
                             if tower1[index].tower_name == "long tower":
                                 gold += 100
                             if tower1[index].tower_name == "support tower":  # ~ Copyright : 노관태
-                                gold += 100
+                                gold += 200
                             if tower1[i].is_support:
                                 support_index.pop()
+                            index -= 1
                             tower1.pop()  # ~made by 김재희
 
             if build == 1:  # made by 김재희~
@@ -305,12 +310,13 @@ def Map_1_starting(screen) :
                                     if badguy[j].hp <= 0:
                                         if badguy[j].name == "MERS virus":  # Copyright : 노관태~
                                             score += 10
-                                            gold += 10
+                                            gold += 5
                                         if badguy[j].name == "ZIKA virus":
                                             score += 15
-                                            gold += 12
+                                            gold += 6
                                         if badguy[j].name == "EBOLA virus":
-                                            gold += 17
+                                            score += 20
+                                            gold += 8
                                         if badguy[j].name == "CORONA virus":  # ~ Copyright : 노관태
                                             score += 300
                                             gold += 100
@@ -391,8 +397,10 @@ def Map_1_starting(screen) :
                         if chal_sv[z] == 3 :
                             chal_sv[z] =1
 
+            wave_print = Font.render("Wave  : " + str(int(wave + 1)), True, (0, 0, 0))
             Score_print = Font.render("Score : " + str(int(score)), True, (0, 0, 0))
-            screen.blit(Score_print, (0, 620))
+            screen.blit(Score_print, (10, 620))
+            screen.blit(wave_print, (10, 580))
 
             chal = challenge.challenge_6(chal, life)
             if chal_sv[7] == 0 and chal[7] == 1:
@@ -427,8 +435,17 @@ def Map_1_starting(screen) :
             if(curtime-oldtime > 10) :
                 # 타이머 구현 #copyright 이동우
 
-                if count < 40 :
-                    if curtime - vtimer >= 1 :
+                if count < viruslist[wave][0] :
+                    type_virus = 0
+                if count > viruslist[wave][0] :
+                    type_virus = 1
+                if count > viruslist[wave][0] + viruslist[wave][1]:
+                    type_virus = 2
+                if count > viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2]:
+                    type_virus = 3
+
+                if count < viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
+                    if curtime - vtimer >= 0.4 :
                         count += 1
                         vtimer = curtime
                         badguy.append(virus.Virus(type_virus))
@@ -439,7 +456,7 @@ def Map_1_starting(screen) :
                                                [120, 420], [120, 60],
                                                [0, 60]]
 
-                type_virus = count//10
+
 
 
 
@@ -474,11 +491,18 @@ def Map_1_starting(screen) :
                 if(life <=0) :
                     Gameoverbool = True
                     break
-                if count >= 40 :
+                if count >= viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
                     if len(badguy) == 0 :
                         count = 0
-                        gold += 200
+                        gold += 100
+                        wave += 1
+                        if wave == 10:
+                            score += life*100
+                            score += gold
+                            GameOver.GameOver(screen, score, life, gold)
+                            return 1
                         break
+
 
 
 
