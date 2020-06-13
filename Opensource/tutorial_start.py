@@ -487,6 +487,14 @@ def tutorial_starting(screen) :
 
 
                 if(life <=0) :
+                    # copyright -shin hyuk jin
+                    pygame.mixer.init()
+                    pygame.mixer.music.load("sound/damage.wav")
+                    pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
+
+                    pygame.mixer.music.play()
+
+                    pygame.mixer.Sound("sound/damage.wav")
                     Gameoverbool = True
                     break
                 if count >= viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
@@ -495,9 +503,18 @@ def tutorial_starting(screen) :
                         gold += 100
                         wave += 1
                         if wave == 5:
+                            #copyright-shin
+                            pygame.mixer.init()
+                            pygame.mixer.music.load("sound/roundswap.wav")
+                            pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
+
+                            pygame.mixer.music.play()
+
+                            pygame.mixer.Sound("sound/roundswap.wav")
                             score += life*100
                             score += gold
                             GameOver.GameClear(screen, score, life, gold)
+
                             return 1
                         break
 

@@ -491,6 +491,14 @@ def Map_1_starting(screen) :
 
 
                 if(life <=0) :
+                    # copyright -shin hyuk jin
+                    pygame.mixer.init()
+                    pygame.mixer.music.load("sound/damage.wav")
+                    pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
+
+                    pygame.mixer.music.play()
+
+                    pygame.mixer.Sound("sound/damage.wav")
                     Gameoverbool = True
                     virus.Virus.Allnum = 0
                     break
@@ -500,6 +508,14 @@ def Map_1_starting(screen) :
                         gold += 100
                         wave += 1
                         if wave == 10:
+                            #copyright-shin
+                            pygame.mixer.init()
+                            pygame.mixer.music.load("sound/roundswap.wav")
+                            pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
+
+                            pygame.mixer.music.play()
+
+                            pygame.mixer.Sound("sound/roundswap.wav")
                             score += life*100
                             score += gold
                             GameOver.GameClear(screen, score, life, gold)
