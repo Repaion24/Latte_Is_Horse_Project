@@ -135,14 +135,14 @@ def Map_2_starting(screen) :
 
     count = 0
     type_virus = 0
-    # bgm - shin
+    # bgm
     pygame.mixer.init()
-    pygame.mixer.music.load("sound/seabgm.wav")
+    pygame.mixer.music.load("sound/gamebgm.wav")
     pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
 
     pygame.mixer.music.play()
 
-    pygame.mixer.Sound("sound/seabgm.wav")
+    pygame.mixer.Sound("sound/gamebgm.wav")
     managetime = time.time()
     viruslist = [[5,0,0,0],[10,0,0,0],[20,10,0,0],[20,0,10,0],[30,30,30,0],[0,70,0,0],[0,0,70,0],[0,70,70,0],[100,50,50,0], [0,0,0,1]]
     wave = 0

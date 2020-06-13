@@ -10,9 +10,9 @@ class long_tower(tower) :
         self.is_support = False
         self.width = 0
         self.height = 0
-        self.damage = 2
+        self.damage = 7
         self.plus_damage = 0
-        self.range = 125
+        self.range = 150
         self.speed = 1.5
         self.level = 0
         self.attack = 0
@@ -20,7 +20,7 @@ class long_tower(tower) :
         self.selected = False
         self.attack_on = False
         self.upgrade_price = [100, 150, 200, "Done"]
-        self.sell_price = [50, 75, 100, 150]
+        self.sell_price = [50, 100, 150, 200]
         self.Timage = []
         self.Timage.append(pygame.image.load("tower/long_tower1.png"))
         self.Timage.append(pygame.image.load("tower/long_tower2.png"))

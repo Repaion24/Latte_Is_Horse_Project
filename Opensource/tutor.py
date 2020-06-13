@@ -1,9 +1,7 @@
-#shin
 import pygame
 
 
 def Tutorial(screen):
-    Imgbefore = pygame.image.load("tutorial/before.png")
     Imgnext = pygame.image.load("tutorial/next.png")
     tImg1 = pygame.image.load("tutorial/main.png")
     tImg2 = pygame.image.load("tutorial/map.png")
@@ -12,7 +10,6 @@ def Tutorial(screen):
     tImg5 = pygame.image.load("tutorial/tower.png")
     tImg6 = pygame.image.load("tutorial/virus.png")
     tImg7 = pygame.image.load("tutorial/rank.png")
-    tImg8 = pygame.image.load("tutorial/start.png")
 
     getx = Imgnext.get_width()
     getu = Imgnext.get_height()
@@ -43,7 +40,7 @@ def Tutorial(screen):
             return 1
       # if count == 7:
           # return 2
-        screen.blit(Imgbefore,(0,720-getu))
+        screen.blit(Imgnext,(0,720-getu))
         screen.blit(Imgnext, (1280-getx,720-getu))
         pygame.display.flip()
         for event in pygame.event.get():
@@ -55,4 +52,3 @@ def Tutorial(screen):
                 if position[0] >= 1280 - getx and position[0] <= 1280:
                     if position[1] >= 720 - getu and position[1] <= 720:
                         count += 1
-

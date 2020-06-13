@@ -2,7 +2,9 @@ import pygame
 import interface
 import GameOver
 import Map_1_start
-
+import Map_2_start
+import tutorial_start
+import tutor
 # Copyright : 노관태 - 메뉴1 구현 - 맵 선택화면
 
 
@@ -57,13 +59,15 @@ def start_menu1 (screen):
 
                 if position[1] > 128 and position[1] < 384:
                     if position[0] > 128 and position[0] < 128+256:
-                        GameOver.GameOver(screen,95000,8,1200)
+                        tutor.Tutorial(screen)
+                        tutorial_start.tutorial_starting(screen)
                         return 1
                     elif position[0] > 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256:
                         Map_1_start.Map_1_starting(screen)
                         return 1
-                    elif position[0] > 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256:
-                        pass
+                    elif position[0] > 128 + 256 + 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256 + 128 + 256:
+                        Map_2_start.Map_2_starting(screen)
+                        return 1
 
 
 
