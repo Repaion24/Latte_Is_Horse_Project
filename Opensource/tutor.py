@@ -1,7 +1,9 @@
+#copyright -shin hyuk jin
 import pygame
 
 
 def Tutorial(screen):
+    Imgbf = pygame.image.load("tutorial/before.png")
     Imgnext = pygame.image.load("tutorial/next.png")
     tImg1 = pygame.image.load("tutorial/main.png")
     tImg2 = pygame.image.load("tutorial/map.png")
@@ -40,7 +42,7 @@ def Tutorial(screen):
             return 1
       # if count == 7:
           # return 2
-        screen.blit(Imgnext,(0,720-getu))
+        screen.blit(Imgbf,(0,720-getu))
         screen.blit(Imgnext, (1280-getx,720-getu))
         pygame.display.flip()
         for event in pygame.event.get():

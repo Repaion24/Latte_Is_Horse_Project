@@ -134,7 +134,7 @@ def Map_1_starting(screen) :
 
     count = 0
     type_virus = 0
-    # bgm
+    # copyright -shin hyuk jin
     pygame.mixer.init()
     pygame.mixer.music.load("sound/gamebgm.wav")
     pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1

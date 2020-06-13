@@ -134,14 +134,14 @@ def tutorial_starting(screen) :
 
     count = 0
     type_virus = 0
-    # bgm
+    # copyright -shin hyuk jin
     pygame.mixer.init()
-    pygame.mixer.music.load("sound/gamebgm.wav")
+    pygame.mixer.music.load("sound/tutorbgm.wav")
     pygame.mixer.music.set_volume(0.1)  # 1 ~ 0.1
 
     pygame.mixer.music.play()
 
-    pygame.mixer.Sound("sound/gamebgm.wav")
+    pygame.mixer.Sound("sound/tutorbgm.wav")
     managetime = time.time()
     viruslist = [[1,0,0,0],[2,0,0,0],[3,0,0,0],[4,0,0,0],[5,0,0,0]]
     wave = 0

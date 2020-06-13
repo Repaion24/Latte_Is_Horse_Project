@@ -5,6 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/Opensource.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Opensource.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map_1_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_1_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Map_2_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/Map_2_start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutor.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tutorial_start.py" beforeDir="false" afterPath="$PROJECT_DIR$/tutorial_start.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,12 +29,13 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.make_test">
@@ -105,22 +110,26 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="804" y="271" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1590772660287" />
-    <state width="1548" height="292" key="GridCell.Tab.0.bottom" timestamp="1592043478815">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="681" height="283" key="GridCell.Tab.0.bottom" timestamp="1592045999383">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1548" height="292" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592043478815" />
-    <state width="1548" height="292" key="GridCell.Tab.0.center" timestamp="1592043478815">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="681" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1080/-1920.3.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592045999383" />
+    <state width="681" height="283" key="GridCell.Tab.0.center" timestamp="1592045999383">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1548" height="292" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592043478815" />
-    <state width="1548" height="292" key="GridCell.Tab.0.left" timestamp="1592043478815">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="681" height="283" key="GridCell.Tab.0.center/0.0.1920.1080/-1920.3.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592045999383" />
+    <state width="681" height="283" key="GridCell.Tab.0.left" timestamp="1592045999383">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1548" height="292" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592043478815" />
-    <state width="1548" height="292" key="GridCell.Tab.0.right" timestamp="1592043478815">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="681" height="283" key="GridCell.Tab.0.left/0.0.1920.1080/-1920.3.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592045999383" />
+    <state width="681" height="283" key="GridCell.Tab.0.right" timestamp="1592045999383">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state width="1548" height="292" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592043478815" />
+    <state width="681" height="283" key="GridCell.Tab.0.right/0.0.1920.1080/-1920.3.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592045999383" />
     <state width="1899" height="189" key="GridCell.Tab.1.bottom" timestamp="1591883942066">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -137,10 +146,11 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="189" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1591883942066" />
-    <state x="525" y="172" key="SettingsEditor" timestamp="1592043396151">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="525" y="179" key="SettingsEditor" timestamp="1592045654614">
+      <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="525" y="172" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592043396151" />
+    <state x="525" y="179" key="SettingsEditor/0.0.1920.1080/-1920.3.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1592045654614" />
     <state x="589" y="303" key="com.intellij.ide.util.TipDialog" timestamp="1591890788007">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
