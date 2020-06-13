@@ -59,20 +59,20 @@ def on_road2(x, y) :
             return True
         if x >= 100 and x <= 200 and y >= 380 and y <= 620 :
             return True
-        if x >= 200 and x <= 680 and y >= 520 and y <= 620 :
+        if x >= 200 and x <= 740 and y >= 520 and y <= 620 :
             return True
-        if x >= 580 and x <= 680 and y >= 280 and y <= 520 :
+        if x >= 640 and x <= 740 and y >= 280 and y <= 520 :
             return True
-        if x >= 680 and x <= 920 and y >= 280 and y <= 380 :
+        if x >= 740 and x <= 980 and y >= 280 and y <= 380 :
             return True
-        if x >= 820 and x <= 920 and y >= 380 and y <= 720 :
+        if x >= 980 and x <= 1020 and y >= 380 and y <= 720 :
             return True
     else :
         return True
     return False
 
 
-def Map_1_starting(screen) :
+def Map_2_starting(screen) :
     chal = [0,0,0,0,0,0,0,0,0]
     chal_sv = [0,0,0,0,0,0,0,0,0]
     touer = [False, False, False, False]
@@ -82,11 +82,12 @@ def Map_1_starting(screen) :
 
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
-    back_ground = pygame.image.load("image/virus/map2.png")
+    back_ground = pygame.image.load("image/virus/map1.png")
     interface = pygame.image.load("image/virus/interface.png")
     map1 = map.map(screen)
-    map1.ch = [[120,60],[120,420],[300,420],[300,180],[540,180],[540,420],[780,420],[780,720]]
-    map1.set([0, 60], [1280, 600])
+    map1.img = pygame.image.load("image/virus/mapicon2.png")
+    map1.ch = [[420,60],[420,300],[120,300],[120,540],[660,540],[660,300],[900,300],[900,720]]
+    map1.set([0, 60],[900,720])
 
     chal_img = []
     chal_img.append(pygame.image.load("image/challenge/chal_1.png"))
@@ -261,7 +262,7 @@ def Map_1_starting(screen) :
                                 else:
                                     build_ok = True
 
-                        if on_road1(position[0], position[1]) == False :
+                        if on_road2(position[0], position[1]) == False :
                             if (build_ok == True) :
                                 build -= 1
                                 if tower1[index].tower_name == "normal tower":# Copyright : 노관태~
@@ -451,10 +452,8 @@ def Map_1_starting(screen) :
                         badguy.append(virus.Virus(type_virus))
                         vindex += 1
                         badguy[vindex].setType()
-                        badguy[vindex].setPos([780, 720])
-                        badguy[vindex].path = [[780, 720], [780, 420], [540, 420], [540, 180], [300, 180], [300, 420],
-                                               [120, 420], [120, 60],
-                                               [0, 60]]
+                        badguy[vindex].setPos([900, 720])
+                        badguy[vindex].path = [[900,720],[900,300],[660,300],[660,540],[120,540],[120,300],[420,300],[420,60],[0,60]]
 
 
 
