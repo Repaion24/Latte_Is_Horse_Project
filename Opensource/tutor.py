@@ -42,7 +42,8 @@ def Tutorial(screen):
             return 1
       # if count == 7:
           # return 2
-        screen.blit(Imgbf,(0,720-getu))
+        if count >= 2 :
+            screen.blit(Imgbf,(0,720-getu))
         screen.blit(Imgnext, (1280-getx,720-getu))
         pygame.display.flip()
         for event in pygame.event.get():
@@ -50,7 +51,8 @@ def Tutorial(screen):
                 position = pygame.mouse.get_pos()
                 if position[0] >= 0 and position[0] <= getx:
                     if position[1] >= 720 - getu and position[1] <= 720:
-                        count -= 1
+                        if count > 1 :
+                            count -= 1
                 if position[0] >= 1280 - getx and position[0] <= 1280:
                     if position[1] >= 720 - getu and position[1] <= 720:
                         count += 1

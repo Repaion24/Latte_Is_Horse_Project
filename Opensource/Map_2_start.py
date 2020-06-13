@@ -144,7 +144,8 @@ def Map_2_starting(screen) :
 
     pygame.mixer.Sound("sound/seabgm.wav")
     managetime = time.time()
-    viruslist = [[5,0,0,0],[10,0,0,0],[20,10,0,0],[20,0,10,0],[30,30,30,0],[0,70,0,0],[0,0,70,0],[0,70,70,0],[100,50,50,0], [0,0,0,1]]
+    viruslist = [[10,0,0,0],[50,0,0,0],[50,50,0,0],[50,0,50,0],[50,50,50,0],[100,30,30,0],[0,200,0,0],[0,0,200,0],[0,300,300,0], [0,0,0,1]\
+        ,[100,0,0,1],[100,30,0,1],[100,0,30,1],[100,30,30,1],[0,500,0,1],[0,0,500,1],[0,500,500,1],[500,500,500,1],[100,100,100,10], [0,0,0,100], [0,0,0,1]]
     wave = 0
 
     while True :
@@ -498,7 +499,7 @@ def Map_2_starting(screen) :
                         if wave == 10:
                             score += life*100
                             score += gold
-                            GameOver.GameOver(screen, score, life, gold)
+                            GameOver.GameClear(screen, score, life, gold)
                             return 1
                         break
 

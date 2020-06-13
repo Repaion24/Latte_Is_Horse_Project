@@ -497,7 +497,7 @@ def tutorial_starting(screen) :
                         if wave == 5:
                             score += life*100
                             score += gold
-                            GameOver.GameOver(screen, score, life, gold)
+                            GameOver.GameClear(screen, score, life, gold)
                             return 1
                         break
 

@@ -28,7 +28,7 @@ def on_roadt(x, y) :
 
 def on_road1(x, y) :
     if x <= 1020 :
-        if x >= 0 and x <= 200 and y >= 40 and y <= 160 :
+        if x >= 0 and x <= 200 and y >= 40 and y <= 140 :
             return True
         if x >= 100 and x <= 200 and y >= 160 and y <= 500 :
             return True
@@ -330,8 +330,9 @@ def Map_1_starting(screen) :
                                         vindex -= 1
                                         break
                                 break
-                else:
+                else :
                     if tower1[i].is_support == False:
+                        attack_on = False
                         tower1[i].attack = 0
                 if tower1[i].is_support == False:
                     if attack_on == False:
@@ -445,14 +446,15 @@ def Map_1_starting(screen) :
                     type_virus = 3
 
                 if count < viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
-                    if curtime - vtimer >= 0.4 :
+                    if curtime - vtimer >= 0.5 / (1 + (wave + 1) / 5):
                         count += 1
                         vtimer = curtime
                         badguy.append(virus.Virus(type_virus))
                         vindex += 1
                         badguy[vindex].setType()
                         badguy[vindex].setPos([780, 720])
-                        badguy[vindex].path = [[780, 720], [780, 420], [540, 420], [540, 180], [300, 180], [300, 420],
+                        badguy[vindex].path = [[780, 720], [780, 420], [540, 420], [540, 180], [300, 180],
+                                               [300, 420],
                                                [120, 420], [120, 60],
                                                [0, 60]]
 
@@ -490,6 +492,7 @@ def Map_1_starting(screen) :
 
                 if(life <=0) :
                     Gameoverbool = True
+                    virus.Virus.Allnum = 0
                     break
                 if count >= viruslist[wave][0] + viruslist[wave][1] + viruslist[wave][2] + viruslist[wave][3] :
                     if len(badguy) == 0 :
@@ -499,7 +502,8 @@ def Map_1_starting(screen) :
                         if wave == 10:
                             score += life*100
                             score += gold
-                            GameOver.GameOver(screen, score, life, gold)
+                            GameOver.GameClear(screen, score, life, gold)
+                            virus.Virus.Allnum = 0
                             return 1
                         break
 
@@ -514,6 +518,7 @@ def Map_1_starting(screen) :
 
         if Gameoverbool :
             GameOver.GameOver(screen,score,life,gold)
+            virus.Virus.Allnum = 0
             return 1
 
 
