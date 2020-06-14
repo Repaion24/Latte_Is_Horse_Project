@@ -26,3 +26,9 @@ class long_tower(tower) :
         self.Timage.append(pygame.image.load("tower/long_tower2.png"))
         self.sell = pygame.image.load("tower/sell.png")
         self.upgrade = pygame.image.load("tower/upgrade.png")
+
+    def upgrade_tower(self):
+        self.level += 1
+        self.range += 35
+        self.damage += 4
+        return self.upgrade_price[self.level-1]

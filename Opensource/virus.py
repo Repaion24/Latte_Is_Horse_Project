@@ -151,4 +151,4 @@ class Virus: #copyright 이동우
         self.name = "CORONA virus"
         self.hp = 1000  # 바이러스 체력
         self.dmg = 20  # 바이러스 공격력
-        self.speed = 2  # 바이러스 스피드
+        self.speed = 1  # 바이러스 스피드

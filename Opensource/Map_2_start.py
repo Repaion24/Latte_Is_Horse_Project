@@ -147,7 +147,7 @@ def Map_2_starting(screen) :
     pygame.mixer.Sound("sound/seabgm.wav")
     managetime = time.time()
     viruslist = [[10,0,0,0],[50,0,0,0],[50,40,0,0],[50,0,40,0],[50,50,50,0],[100,30,30,0],[0,200,0,0],[0,0,200,0],[0,300,300,0], [0,0,0,1]\
-        ,[100,0,0,2],[100,50,0,3],[100,0,50,4],[100,50,50,5],[0,500,0,6],[0,0,500,7],[0,500,500,8],[500,500,500,9],[100,100,100,10], [0,0,0,100], [0,0,0,1]]
+        ,[100,0,0,1],[100,50,0,1],[100,0,50,2],[100,50,50,2],[0,500,0,3],[0,0,500,3],[0,500,500,4],[500,500,500,4],[100,100,100,20], [0,0,0,100], [0,0,0,1]]
     wave = 0
 
     while True :
@@ -209,10 +209,7 @@ def Map_2_starting(screen) :
                                     if position[1] >= 459 and position[1] <= 459 + tower1[i].upgrade.get_height():
                                         if tower1[i].level <= 2:
                                             if gold >= tower1[i].upgrade_price[tower1[i].level]:
-                                                if tower1[i].level == 2:
-                                                    tower1[i].upgrade_tower()
-                                                else:
-                                                    gold -= tower1[i].upgrade_tower()
+                                                gold -= tower1[i].upgrade_tower()
                                 else:
                                     tower1[i].selected = tower1[i].select_tower(position[0], position[1])
                             else:
@@ -322,7 +319,7 @@ def Map_2_starting(screen) :
                                             gold += 10
                                         if badguy[j].name == "CORONA virus":  # ~ Copyright : 노관태
                                             score += 300
-                                            gold += 100
+                                            gold += 300
                                         badguy[j].dead()
                                         badguy.pop(j)
 
@@ -453,7 +450,7 @@ def Map_2_starting(screen) :
                         k = 1
                     else :
                         k = 2
-                    if curtime - vtimer >= 0.4 / (k + (wave + 1) / 10) :
+                    if curtime - vtimer >= 0.4 / (k + ((wave + 1) / 10)) :
                         count += 1
                         vtimer = curtime
                         badguy.append(virus.Virus(type_virus))
@@ -462,7 +459,8 @@ def Map_2_starting(screen) :
                         badguy[vindex].setPos([900, 720])
                         badguy[vindex].path = [[900,720],[900,300],[660,300],[660,540],[120,540],[120,300],[420,300],[420,60],[0,60]]
                         if wave >= 10 :
-                            badguy[vindex].hp = badguy[vindex].hp * 3
+                            if type_virus != 3:
+                                badguy[vindex].hp = badguy[vindex].hp * 3
 
 
 

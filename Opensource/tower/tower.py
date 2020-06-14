@@ -17,7 +17,7 @@ class tower :
         self.attack = 0
         self.timer = 0
         self.selected = False
-        self.upgrade_price = [50, 100, 150, "done"]
+        self.upgrade_price = [50, 100, 150, "Done"]
         self.sell_price = [25, 50, 75, 100]
         self.Timage = []
         self.Timage.append(pygame.image.load("tower/normal_tower1.png"))

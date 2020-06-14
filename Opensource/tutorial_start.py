@@ -207,10 +207,7 @@ def tutorial_starting(screen) :
                                     if position[1] >= 459 and position[1] <= 459 + tower1[i].upgrade.get_height():
                                         if tower1[i].level <= 2:
                                             if gold >= tower1[i].upgrade_price[tower1[i].level]:
-                                                if tower1[i].level == 2:
-                                                    tower1[i].upgrade_tower()
-                                                else:
-                                                    gold -= tower1[i].upgrade_tower()
+                                                gold -= tower1[i].upgrade_tower()
                                 else:
                                     tower1[i].selected = tower1[i].select_tower(position[0], position[1])
                             else:
@@ -320,7 +317,7 @@ def tutorial_starting(screen) :
                                             gold += 10
                                         if badguy[j].name == "CORONA virus":  # ~ Copyright : 노관태
                                             score += 300
-                                            gold += 100
+                                            gold += 300
                                         badguy[j].dead()
                                         badguy.pop(j)
 
