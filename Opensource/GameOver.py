@@ -89,6 +89,8 @@ def GameClear (screen,score,Health,gold) :
 def GameOver (screen,score,Health,gold) :
 
     up = "\n"
+    if Health <0 :
+        Health = 0
 
     shouldreturn =0
 
