@@ -9,7 +9,7 @@ class tower :
         self.is_support = False
         self.width = 0
         self.height = 0
-        self.damage = 1
+        self.damage = 2
         self.plus_damage = 0
         self.range = 100
         self.speed = 1
@@ -17,7 +17,7 @@ class tower :
         self.attack = 0
         self.timer = 0
         self.selected = False
-        self.upgrade_price = [50, 100, 150, "done"]
+        self.upgrade_price = [50, 100, 150, "Done"]
         self.sell_price = [25, 50, 75, 100]
         self.Timage = []
         self.Timage.append(pygame.image.load("tower/normal_tower1.png"))
@@ -80,7 +80,7 @@ class tower :
     def upgrade_tower(self):
         self.level += 1
         self.range += 25
-        self.damage += 1
+        self.damage += 3
         return self.upgrade_price[self.level-1]
 
     def tower_attack(self, gtimer):

@@ -2,7 +2,9 @@ import pygame
 import interface
 import GameOver
 import Map_1_start
-
+import Map_2_start
+import tutorial_start
+import tutor
 # Copyright : 노관태 - 메뉴1 구현 - 맵 선택화면
 
 
@@ -12,15 +14,19 @@ def start_menu1 (screen):
     tutorial = pygame.image.load("image/map/tutorial.png")
     map1 = pygame.image.load("image/map/map1.png")
     map2 = pygame.image.load("image/map/map2.png")
-
-
+    font = pygame.font.Font(None, 52)
+    Tutor = font.render("Tutorial", True, (255, 255, 255))
+    map_1 = font.render("Map1", True, (255, 255, 255))
+    map_2 = font.render("Map2", True, (255, 255, 255))
     while True:
         screen.blit(menu1_back, (0, 0))
         screen.blit(menu4, (192, 576))
         screen.blit(tutorial, (128,128))
         screen.blit(map1, (128+256+128, 128))
         screen.blit(map2, (128+256+128+256+128, 128))
-
+        screen.blit(Tutor, (128, 128 + 270))
+        screen.blit(map_1, (128 + 256 + 128, 128 + 270))
+        screen.blit(map_2, (128 + 256 + 128 + 256 + 128, 128 + 270))
         position = pygame.mouse.get_pos()
         if position[0] > 384 and position[0] < 896:
             if position[1] > 576 and position[1] < 704:
@@ -57,13 +63,16 @@ def start_menu1 (screen):
 
                 if position[1] > 128 and position[1] < 384:
                     if position[0] > 128 and position[0] < 128+256:
-                        GameOver.GameOver(screen,95000,8,1200)
+                        tutor.Tutorial(screen)
+                        tutorial_start.tutorial_starting(screen)
                         return 1
                     elif position[0] > 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256:
                         Map_1_start.Map_1_starting(screen)
                         return 1
-                    elif position[0] > 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256:
-                        pass
+                    elif position[0] > 128 + 256 + 128 + 256 + 128 and position[0] < 128 + 256 + 128 + 256 + 128 + 256:
+                        Map_2_start.Map_2_starting(screen)
+                        return 1
+
 
 
 
